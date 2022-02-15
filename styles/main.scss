@@ -1,0 +1,252 @@
+@import "responsive";
+
+@font-face {
+    font-family: "VT323";
+    src: url("../assets/vt323-v15-latin-regular.ttf");
+}
+
+/** Colors */
+$background: #DFD4D4;
+$text: white;
+
+$card-bg: #2b2121;
+
+$specs-text: #878787;
+
+$border: #878787;
+
+$name-bg: black;
+
+@mixin frow {
+    display: flex;
+    flex-direction: row;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    background-color: $background;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "VT323";
+    font-size: 1.2rem;
+}
+
+p, li {
+    color: $text;
+}
+
+.loading-pokeball {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background-image: url(../assets/pokeball.png);
+    background-size: cover;
+    animation: rolling 2s infinite linear;
+}
+
+@keyframes rolling {
+    from { transform: rotateZ(0); }
+    to { transform: rotateZ(360deg); }
+}
+
+.invisible {
+    opacity: 0;
+    transition: opacity 500ms;
+}
+
+.slide-apparition {
+    transform: translateX(-200%);
+}
+
+.undisplay {
+    display: none !important;
+}
+
+.card {
+    position: relative;
+
+    max-width: 800px;
+    min-width: 400px;
+    width: 70%;
+    height: 365px;
+
+    background: $card-bg;
+    border-radius: 70px 0 0 135px;
+    padding: 25px 0 25px 50px;
+
+    transition: transform 500ms;
+
+    &::before {
+        content: "";
+        background-image: url("../assets/pokeball.png");
+        background-size: cover;
+
+        position: absolute;
+        top: -50px;
+        left: -70px;
+
+        width: 400px;
+        height: 400px;
+        z-index: -1;
+    }
+
+    .pannel {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 25px;
+        height: 100%;
+
+        &::after {
+            content: "";
+            
+            position: absolute;
+            left: 9%;
+            width: 91%;
+            height: 86%;
+
+            @include mobile {
+                left: 15%;
+                width: 85%;
+                height: 85%;
+            }
+
+            border-top: 1px solid $border;
+            border-bottom: 1px solid $border;    
+
+            pointer-events: none;
+        }
+        
+        .pokemon-list-div {
+            padding-right: 10px;
+            border-right: 1px solid $border;
+
+            flex: 1.25;
+            font-size: 1.6rem;
+
+            input {
+                font-family: "VT323";
+                font-size: 22px;
+                width: 100%;
+                
+                color: white;
+                background-color: black;
+
+                border: 1px solid $border;
+                border-radius: 5px;
+
+                text-align: center;
+            }
+
+            .selector {
+                padding-left: 20px;
+            }
+
+            .pokemon-name-selector {
+                padding-left: 19px;
+            }
+
+            .pokemon-name {
+                padding-left: 38px;
+            }
+
+            ul {
+                list-style-type: none;
+                height: 73%;
+                overflow-y: scroll;
+                scrollbar-width: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                li {
+                    background-color: $name-bg;     
+                    border-radius: 25px;
+                    border: 1px solid $border;
+                    margin: 5px;  
+                    padding-left: 15px;
+                }
+
+                li:hover, .pokemon-selected {
+                    border: 1px solid white;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .pokemon-stats {
+            flex: 2;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+
+            color: $specs-text;
+
+            #toggle-button {
+                display: none;
+                position: absolute;
+                top: 25px;
+                left: 50px;
+                width: 21px;
+                margin-top: 11px;
+                filter: invert(1);
+                cursor: pointer;
+            }
+
+            @include mobile {
+                #toggle-button {
+                    z-index: 2;
+                    display: inline-block;
+                }    
+            }
+
+            p {
+                color: inherit;
+            }
+
+            .current-pkm-name, .species, .size, .weight, .description {
+                color: $text;
+            }
+
+            .current-pkm-name {
+                font-size: 1.65rem;
+            }
+
+            .current-pkm-img {
+                width: 65px;
+                margin: 10px 0;
+            }
+
+            #cry-pkm {
+                width: 15px;
+                cursor: pointer;
+                margin-bottom: 10px;
+            }
+
+            .description {
+                border-top: 1px solid $border;
+            }
+
+            .specs {
+                @include frow();
+                align-self: flex-start;
+                gap: 15px;
+            }
+        }
+    }
+}

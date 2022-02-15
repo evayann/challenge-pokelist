@@ -1,0 +1,165 @@
+@font-face {
+  font-family: "VT323";
+  src: url("../assets/vt323-v15-latin-regular.ttf"); }
+
+/** Colors */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+html {
+  height: 100%;
+  background-color: #DFD4D4; }
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "VT323";
+  font-size: 1.2rem; }
+
+p, li {
+  color: white; }
+
+.loading-pokeball {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background-image: url(../assets/pokeball.png);
+  background-size: cover;
+  animation: rolling 2s infinite linear; }
+
+@keyframes rolling {
+  from {
+    transform: rotateZ(0); }
+  to {
+    transform: rotateZ(360deg); } }
+
+.invisible {
+  opacity: 0;
+  transition: opacity 500ms; }
+
+.slide-apparition {
+  transform: translateX(-200%); }
+
+.undisplay {
+  display: none !important; }
+
+.card {
+  position: relative;
+  max-width: 800px;
+  min-width: 400px;
+  width: 70%;
+  height: 365px;
+  background: #2b2121;
+  border-radius: 70px 0 0 135px;
+  padding: 25px 0 25px 50px;
+  transition: transform 500ms; }
+  .card::before {
+    content: "";
+    background-image: url("../assets/pokeball.png");
+    background-size: cover;
+    position: absolute;
+    top: -50px;
+    left: -70px;
+    width: 400px;
+    height: 400px;
+    z-index: -1; }
+  .card .pannel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 25px;
+    height: 100%; }
+    .card .pannel::after {
+      content: "";
+      position: absolute;
+      left: 9%;
+      width: 91%;
+      height: 86%;
+      border-top: 1px solid #878787;
+      border-bottom: 1px solid #878787;
+      pointer-events: none; }
+      @media screen and (max-width: 800px) {
+        .card .pannel::after {
+          left: 15%;
+          width: 85%;
+          height: 85%; } }
+    .card .pannel .pokemon-list-div {
+      padding-right: 10px;
+      border-right: 1px solid #878787;
+      flex: 1.25;
+      font-size: 1.6rem; }
+      .card .pannel .pokemon-list-div input {
+        font-family: "VT323";
+        font-size: 22px;
+        width: 100%;
+        color: white;
+        background-color: black;
+        border: 1px solid #878787;
+        border-radius: 5px;
+        text-align: center; }
+      .card .pannel .pokemon-list-div .selector {
+        padding-left: 20px; }
+      .card .pannel .pokemon-list-div .pokemon-name-selector {
+        padding-left: 19px; }
+      .card .pannel .pokemon-list-div .pokemon-name {
+        padding-left: 38px; }
+      .card .pannel .pokemon-list-div ul {
+        list-style-type: none;
+        height: 73%;
+        overflow-y: scroll;
+        scrollbar-width: none; }
+        .card .pannel .pokemon-list-div ul::-webkit-scrollbar {
+          display: none; }
+        .card .pannel .pokemon-list-div ul li {
+          background-color: black;
+          border-radius: 25px;
+          border: 1px solid #878787;
+          margin: 5px;
+          padding-left: 15px; }
+        .card .pannel .pokemon-list-div ul li:hover, .card .pannel .pokemon-list-div ul .pokemon-selected {
+          border: 1px solid white;
+          cursor: pointer; }
+    .card .pannel .pokemon-stats {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      color: #878787; }
+      .card .pannel .pokemon-stats #toggle-button {
+        display: none;
+        position: absolute;
+        top: 25px;
+        left: 50px;
+        width: 21px;
+        margin-top: 11px;
+        filter: invert(1);
+        cursor: pointer; }
+      @media screen and (max-width: 800px) {
+        .card .pannel .pokemon-stats #toggle-button {
+          z-index: 2;
+          display: inline-block; } }
+      .card .pannel .pokemon-stats p {
+        color: inherit; }
+      .card .pannel .pokemon-stats .current-pkm-name, .card .pannel .pokemon-stats .species, .card .pannel .pokemon-stats .size, .card .pannel .pokemon-stats .weight, .card .pannel .pokemon-stats .description {
+        color: white; }
+      .card .pannel .pokemon-stats .current-pkm-name {
+        font-size: 1.65rem; }
+      .card .pannel .pokemon-stats .current-pkm-img {
+        width: 65px;
+        margin: 10px 0; }
+      .card .pannel .pokemon-stats #cry-pkm {
+        width: 15px;
+        cursor: pointer;
+        margin-bottom: 10px; }
+      .card .pannel .pokemon-stats .description {
+        border-top: 1px solid #878787; }
+      .card .pannel .pokemon-stats .specs {
+        display: flex;
+        flex-direction: row;
+        align-self: flex-start;
+        gap: 15px; }
